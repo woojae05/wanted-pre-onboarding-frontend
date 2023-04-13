@@ -1,21 +1,21 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
+import { InputHTMLAttributes } from "react";
+import { StyledInput } from "./input.style";
 
-interface InputPorps {
-  value: string;
-  dataTestId: string;
-  type: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+interface CommonComponentProps {
+  children?: React.ReactNode;
+  customStyle?: React.CSSProperties;
+  disabled?: boolean;
 }
 
-const Input = ({ type, dataTestId, value, onChange }: InputPorps) => {
-  return (
-    <input
-      data-testid={dataTestId}
-      type={type}
-      value={value}
-      onChange={onChange}
-    />
-  );
-};
+export interface InputProps
+  extends InputHTMLAttributes<HTMLInputElement>,
+    Omit<CommonComponentProps, "children"> {}
+
+const Input = React.forwardRef(
+  ({ disabled = false, ...attr }: InputProps, ref) => {
+    return <StyledInput ref={ref} disabled={disabled} {...attr} />;
+  }
+);
 
 export default Input;
