@@ -1,8 +1,9 @@
 import axios from 'axios';
+import config from "../config/config.json"
 import { getLocalStorage, removeLocalStorage } from '../utils/localStorage';
 
 const customAxios = axios.create({
-    baseURL: "https://www.pre-onboarding-selection-task.shop/",
+    baseURL: config.SERVER,
 });
 
 customAxios.interceptors.request.use(
@@ -18,7 +19,7 @@ customAxios.interceptors.request.use(
     (error) => {
         removeLocalStorage('token');
         alert('세션이 만료되었습니다. 다시 로그인해 주시기 바랍니다.');
-        window.open('/signIn', '_self');
+        window.open('/signin', '_self');
     }
 );
 
@@ -28,7 +29,7 @@ customAxios.interceptors.response.use(
         if (error?.response?.status === 400 && error?.response?.data.details === 'Token is missing') {
             removeLocalStorage('token');
             alert('세션이 만료되었습니다. 다시 로그인해 주시기 바랍니다.');
-            window.open('/signIn', '_self');
+            window.open('/signin', '_self');
         }
         return Promise.reject(error);
     }
