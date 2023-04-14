@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
 import { FormData } from "../../../types/form/formData.type";
 import Input from "../input/Input";
 import { Container } from "./signForm.style";
-import { useForm } from "../../../hooks/useForm";
+import { useForm } from "../../../hooks/form/useForm";
+import Button from "../button/Button";
 
 interface SignFormProps {
   value: FormData;
@@ -23,13 +23,13 @@ const SignForm = ({
     로그인: "signin-button",
     회원가입: "signup-button",
   };
-  const { emaliRef } = useForm();
+  const { emailRef } = useForm();
   return (
     <Container>
       <h2>{title}</h2>
       <form onSubmit={handleSubmit}>
         <Input
-          ref={emaliRef}
+          ref={emailRef}
           value={value.email}
           type="text"
           name="email"
@@ -45,12 +45,13 @@ const SignForm = ({
           data-testid="password-input"
           onChange={handleChange}
         />
-        <Input
+        <Button
           type="submit"
           data-testid={signButtonTestId[title]}
-          value={title}
           disabled={!isValid}
-        />
+        >
+          {title}
+        </Button>
       </form>
     </Container>
   );
