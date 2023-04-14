@@ -5,7 +5,6 @@ import { StyledInput } from "./input.style";
 interface CommonComponentProps {
   children?: React.ReactNode;
   customStyle?: React.CSSProperties;
-  disabled?: boolean;
 }
 
 export interface InputProps
@@ -13,8 +12,8 @@ export interface InputProps
     Omit<CommonComponentProps, "children"> {}
 
 const Input = React.forwardRef(
-  ({ disabled = false, ...attr }: InputProps, ref) => {
-    return <StyledInput ref={ref} disabled={disabled} {...attr} />;
+  ({ ...attr }: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+    return <StyledInput ref={ref} {...attr} />;
   }
 );
 
