@@ -3,16 +3,11 @@ import TodoItem from "./item/TodoItem";
 import { Container } from "./todoList.style";
 
 const TodoList = () => {
-  const { todos, modifyTodoHandler, deleteTodoHandler } = useTodoList();
+  const { todos } = useTodoList();
   return (
     <Container>
       {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          item={todo}
-          modifyTodoHandler={modifyTodoHandler}
-          deleteTodoHandler={deleteTodoHandler}
-        />
+        <TodoItem key={todo.id} item={todo} />
       ))}
     </Container>
   );

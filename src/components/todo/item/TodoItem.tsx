@@ -1,82 +1,53 @@
 import Button from "../../common/button/Button";
 import { Todo } from "../../../types/todo";
 import { Item } from "./todoItem.style";
+import useTodoItem from "../../../hooks/todo/useTodoItem";
 import Input from "../../common/input/Input";
-import React, { useState } from "react";
 
 interface TodoItemProps {
   item: Todo;
-  modifyTodoHandler: (item: Todo) => {};
-  deleteTodoHandler: (todoId: number) => {};
 }
 
-const TodoItem = ({
-  item,
-  modifyTodoHandler,
-  deleteTodoHandler,
-}: TodoItemProps) => {
-  const [isModifyMode, setIsModifyMode] = useState(false);
-  const [modifyTodo, setModifyTodo] = useState(item.todo);
-
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setModifyTodo(event.target.value);
-
-  const handleModifyTodo = () => {
-    if (modifyTodo.trim() !== "") {
-      modifyTodoHandler({ ...item, todo: modifyTodo });
-      setIsModifyMode(false);
-    }
-  };
-
-  const handleModifyIsCompleted = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { checked } = event.target;
-    modifyTodoHandler({ ...item, isCompleted: checked });
-  };
-
-  const handleChangeModifyMode = () => {
-    setIsModifyMode(true);
-  };
-
+const TodoItem = ({ item }: TodoItemProps) => {
+  const {
+    isModifyMode,
+    modifyTodoInput,
+    handleChangeModifyIsCompleted,
+    handCancelModfyMode,
+    handleChangeInput,
+    handleDeleteTodo,
+    handleModifyTodo,
+    handleOnModifyMode,
+  } = useTodoItem(item);
   return (
     <>
       <Item isCompleted={item.isCompleted}>
         <input
           type="checkbox"
           checked={item.isCompleted}
-          onChange={handleModifyIsCompleted}
+          onChange={handleChangeModifyIsCompleted}
         />
         {isModifyMode ? (
           <>
-            <Input value={modifyTodo} onChange={handleChangeInput} autoFocus />
+            <Input
+              value={modifyTodoInput}
+              onChange={handleChangeInput}
+              autoFocus
+            />
             <Button data-testid="modify-button" onClick={handleModifyTodo}>
               제출
             </Button>
-            <Button
-              data-testid="delete-button"
-              onClick={() => {
-                setIsModifyMode(false);
-              }}
-            >
+            <Button data-testid="delete-button" onClick={handCancelModfyMode}>
               취소
             </Button>
           </>
         ) : (
           <>
             <span>{item.todo}</span>
-            <Button
-              data-testid="modify-button"
-              onClick={handleChangeModifyMode}
-            >
+            <Button data-testid="modify-button" onClick={handleOnModifyMode}>
               수정
             </Button>
-            <Button
-              data-testid="delete-button"
-              onClick={() => {
-                deleteTodoHandler(item.id);
-              }}
-            >
+            <Button data-testid="delete-button" onClick={handleDeleteTodo}>
               삭제
             </Button>
           </>
