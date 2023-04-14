@@ -22,15 +22,6 @@ const useTodoItem = (item: Todo) => {
         }
     };
 
-    const deleteTodoHandler = async (todoId: number) => {
-        try {
-            await TodoApi.deleteTodo(todoId);
-            deleteTodo(todoId);
-        } catch (error) {
-            alert("todo삭제를 실패하였습니다");
-        }
-    };
-
     const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setModifyTodoInput(event.target.value);
     }
