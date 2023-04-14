@@ -1,5 +1,4 @@
-import React, { createContext } from 'react';
-import { ModifyTodoParam } from '../types/api/todo';
+import { createContext } from 'react';
 import { Todo } from '../types/todo';
 
 interface TodoContextProps {

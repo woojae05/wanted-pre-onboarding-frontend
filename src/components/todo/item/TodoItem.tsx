@@ -2,7 +2,7 @@ import Button from "../../common/button/Button";
 import { Todo } from "../../../types/todo";
 import { Item } from "./todoItem.style";
 import Input from "../../common/input/Input";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 
 interface TodoItemProps {
   item: Todo;

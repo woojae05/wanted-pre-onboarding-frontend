@@ -1,5 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
-import TodoApi from "../../api/todo/Todo.Api";
+import { ReactNode, useState } from "react";
 import TodoContext from "../../context/todoContext";
 import { Todo } from "../../types/todo";
 
