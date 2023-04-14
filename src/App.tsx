@@ -1,28 +1,13 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainPage from "./page/MainPage";
-import TodoPage from "./page/TodoPage";
-import SignUpPage from "./page/SignUpPage";
-import SignInPage from "./page/SignInPage";
+// import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AuthChecker from "./components/common/authChecker/Authchecker";
+import { Outlet } from "react-router-dom";
+
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainPage />,
-    },
-    {
-      path: "signup",
-      element: <SignUpPage />,
-    },
-    {
-      path: "signin",
-      element: <SignInPage />,
-    },
-    {
-      path: "/todo",
-      element: <TodoPage />,
-    },
-  ]);
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <AuthChecker>
+      <Outlet />
+    </AuthChecker>
+  );
 }
 
 export default App;
