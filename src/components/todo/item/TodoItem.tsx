@@ -30,14 +30,15 @@ const TodoItem = ({ item }: TodoItemProps) => {
         {isModifyMode ? (
           <>
             <Input
+              data-testid="modify-input"
               value={modifyTodoInput}
               onChange={handleChangeInput}
               autoFocus
             />
-            <Button data-testid="modify-button" onClick={handleModifyTodo}>
+            <Button data-testid="submit-button" onClick={handleModifyTodo}>
               제출
             </Button>
-            <Button data-testid="delete-button" onClick={handCancelModfyMode}>
+            <Button data-testid="cancel-button" onClick={handCancelModfyMode}>
               취소
             </Button>
           </>
